@@ -89,7 +89,38 @@ ComputeFactorial (number=1) at /mnt/header.cpp:6
 6           int fact = 0;
 (gdb)
 ```
-We executed ComputeFactorial further but found the value of fact remains to be 0 before it is returned
+We executed ComputeFactorial further but found the value of fact remains to be 0 before it is returned.
+To find the root cause of the problem, we should use backtrace
+
+We could also know where the execution is by viewing the stack using backtrace or bt.
+
+```bash
+(gdb) backtrace
+#0  ComputeFactorial (number=2) at /mnt/header.cpp:14
+#1  0x0000555555554c6f in ComputeSeriesValue (x=2, n=3) at /mnt/header.cpp:22
+#2  0x0000555555554b3c in main () at /mnt/logicalError.cpp:25
+```
+
+It immediately points to the source of the problem. In header.cpp we set fact intentionally to 0.
+
+```bash
+  1 #include "header.h"
+  2
+  3 int ComputeFactorial(int number) {
+  4     // Intentionally set fact = 0 so that the factorial computation is always
+  5     // wrong.
+  6     int fact = 0;
+  7     // The correct setting should be:
+  8     // int fact = 1;
+  9
+ 10     for (int j = 1; j <= number; j ++) {
+ 11         fact = fact * j;
+ 12     }
+ 13
+ 14     return fact;
+ 15 }
+
+```
 
 ## References
 

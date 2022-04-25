@@ -52,8 +52,44 @@ The value of the series for the values entered is inf
 gdb ./logicalError 
 (gdb) break ComputeSeriesValue(double, int) 
 Breakpoint 1 at 0xc40: file /mnt/header.cpp, line 18.
-```
+run
+Starting program: /mnt/build/logicalError
+This program is used to compute the value of the following series :
+(x^0)/0! + (x^1)/1! + (x^2)/2! + (x^3)/3! + (x^4)/4! + ........ + (x^n)/n!
+Please enter the value of x : 2
 
+Please enter an integer value for n : 3
+
+
+Breakpoint 1, ComputeSeriesValue (x=2, n=3) at /mnt/header.cpp:18
+18          double seriesValue = 0.0;
+(gdb)
+```
+We suspected that the ComputeFactorial is problematic. We ran the program step by step using next or n several times
+
+```bash
+(gdb) next
+19          double xpow = 1;
+(gdb) n
+21          for (int k = 0; k <= n; k ++) {
+(gdb) n
+22              seriesValue += xpow / ComputeFactorial(k);
+(gdb) n
+23              xpow = xpow * x;
+(gdb) n
+21          for (int k = 0; k <= n; k ++) {
+(gdb) n
+22              seriesValue += xpow / ComputeFactorial(k);
+(gdb)
+```
+When we reach a line of code containing ComputeFactorial, we step into the function ComputeFactorial using step or s.
+```bash
+(gdb) step
+ComputeFactorial (number=1) at /mnt/header.cpp:6
+6           int fact = 0;
+(gdb)
+```
+We executed ComputeFactorial further but found the value of fact remains to be 0 before it is returned
 
 ## References
 

@@ -24,6 +24,7 @@ docker run -it --rm --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -v $(
 ### Build Examples
 
 ```bash
+cd /mnt
 mkdir build
 cd build
 cmake ..

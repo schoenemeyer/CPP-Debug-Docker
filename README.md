@@ -10,13 +10,13 @@ These are examples of how to debug common C/C++ bugs, such as logic errors, segm
 ### Create Docker Image
 
 ```bash
-$ docker build -f cpp.Dockerfile -t cpp-debug:0.0.1 .
+docker build -f cpp.Dockerfile -t cpp-debug:0.0.1 .
 ```
 
 ### Start Docker Container
 
 ```bash
-$ docker run -it --rm --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -v $(pwd):/mnt cpp-debug:0.0.1
+docker run -it --rm --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -v $(pwd):/mnt cpp-debug:0.0.1
 ```
 
 ## Examples
@@ -24,10 +24,10 @@ $ docker run -it --rm --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -v 
 ### Build Examples
 
 ```bash
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make
+mkdir build
+cd build
+cmake ..
+make
 ```
 
 ### Example Files
